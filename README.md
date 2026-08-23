@@ -232,14 +232,8 @@ Contributions to CodeSnap are welcome! To contribute:
 
 _Feel free to reach out if you have questions or just want to chat about web adventures!_
 
-## Acknowledgments
-
-This project wouldn't be possible without the collaboration and resources of the developer community. Thanks to the
-community and tools like React and Nextjs. Special appreciation goes to friends and family. I hope it inspires further
-learning.
-
 ---
 
 <p align="center">
-   Thank you for using <strong>CodeSnap</strong>! Happy coding! 👨‍💻
+   Thank you for using <strong>SnapCode</strong>! Happy coding! 👨‍💻
 </p>

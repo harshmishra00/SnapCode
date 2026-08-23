@@ -2,8 +2,8 @@ import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import React from "react";
 import { Inter } from "next/font/google";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
+// import { SpeedInsights } from "@vercel/speed-insights/next";
+// import { Analytics } from "@vercel/analytics/react";
 
 import { Providers } from "./providers";
 
@@ -67,9 +67,9 @@ export default function layout({ children }: { children: React.ReactNode }) {
                     <div className="relative min-h-svh">{children}</div>
                 </Providers>
                 {/* Vercel Analytics for Web Performance Monitoring */}
-                <Analytics />
+                {/* <Analytics />
                 {/* Vercel Speed Insights for Page Speed Analysis */}
-                <SpeedInsights />
+                {/* <SpeedInsights /> */}
                 {/* TopLoader for loading animation */}
                 <TopLoader />
                 {/* Toast notifications for user feedback */}
