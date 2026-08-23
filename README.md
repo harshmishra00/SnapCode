@@ -1,22 +1,22 @@
 <div align="center">
   <img height="70px" src="https://github.com/user-attachments/assets/89a292d5-674e-41de-b0de-6af88c2042b3" alt="CodeSnap favicon">
-  <h1>CodeSnap – Create, Run & Share Code Snippets</h1>
-  <a href="https://codesnap.pro/">View Demo</a>
+  <h1>SnapCode – Create, Run & Share Code Snippets</h1>
+  <a href="">View Demo</a>
   ·
-  <a href="https://github.com/RanitManik/CodeSnap/issues/new?assignees=&labels=&projects=&template=bug_report.yml&title=">Report Bug</a>
+  <a href="https://github.com/harshmishra00/SnapCode/issues/new?assignees=&labels=&projects=&template=bug_report.yml&title=">Report Bug</a>
   ·
-  <a href="https://github.com/RanitManik/CodeSnap/issues/new?assignees=&labels=&projects=&template=feature_request.yml&title=">Request Feature</a>
+  <a href="https://github.com/harshmishra00/SnapCode/issues/new?assignees=&labels=&projects=&template=feature_request.yml&title=">Request Feature</a>
   <br/>  
   <br/>
 
 ![excited](https://github.com/user-attachments/assets/48f47285-cfe2-41db-8b50-a6a57987c6e9)
 
-![GitHub Created At](https://img.shields.io/github/created-at/RanitManik/CodeSnap)
-![GitHub repo size](https://img.shields.io/github/repo-size/RanitManik/CodeSnap)
-![GitHub License](https://img.shields.io/github/license/RanitManik/CodeSnap)
-![GitHub stars](https://img.shields.io/github/stars/RanitManik/CodeSnap?style=default)
-![GitHub forks](https://img.shields.io/github/forks/RanitManik/CodeSnap?style=default)
-![Wakatime](https://wakatime.com/badge/github/RanitManik/CodeSnap.svg)
+<!-- ![GitHub Created At](https://img.shields.io/github/created-at/harshmishra00/CodeSnap)
+![GitHub repo size](https://img.shields.io/github/repo-size/harshmishra00/CodeSnap)
+![GitHub License](https://img.shields.io/github/license/harshmishra00/CodeSnap)
+![GitHub stars](https://img.shields.io/github/stars/harshmishra00/CodeSnap?style=default)
+![GitHub forks](https://img.shields.io/github/forks/harshmishra00/CodeSnap?style=default)
+![Wakatime](https://wakatime.com/badge/github/harshmishra00/CodeSnap.svg) -->
 
 </div>
 
@@ -99,7 +99,7 @@ and test code within seconds.
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/RanitManik/CodeSnap.git
+    git clone https://github.com/harshmishra00/CodeSnap.git
     cd CodeSnap
     ```
 
@@ -207,26 +207,26 @@ Contributions to CodeSnap are welcome! To contribute:
   <tr>
     <td><img src="https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/112-gmail_email_mail-512.png" width="20" /></td>
     <td>Email</td>
-    <td><code>ranitmanik.dev@gmail.com</code></td>
-    <td><a href="mailto:ranitmanik.dev@gmail.com" target="_blank">Email</a></td>
+    <td><code>harshmishra@example.com</code></td>
+    <td><a href="mailto:harshmishra@example.com" target="_blank">Email</a></td>
   </tr>
   <tr>
     <td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/480px-LinkedIn_logo_initials.png" width="20" /></td>
     <td>LinkedIn</td>
-    <td><code>Ranit Manik</code></td>
-    <td><a href="https://www.linkedin.com/in/ranit-manik/" target="_blank">LinkedIn</a></td>
+    <td><code>Harsh Mishra</code></td>
+    <td><a href="https://www.linkedin.com/in/harshmishra00/" target="_blank">LinkedIn</a></td>
   </tr>
   <tr>
     <td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/600px-Instagram_icon.png" width="20" /></td>
     <td>Instagram</td>
-    <td><code>ranit_manik_</code></td>
-    <td><a href="https://www.instagram.com/ranit_manik_/" target="_blank">Instagram</a></td>
+    <td><code>harshmishra00</code></td>
+    <td><a href="https://www.instagram.com/harshmishra00/" target="_blank">Instagram</a></td>
   </tr>
   <tr>
     <td><img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" width="20" /></td>
     <td>Facebook</td>
-    <td><code>RanitKumarManik</code></td>
-    <td><a href="https://www.facebook.com/RanitKumarManik/" target="_blank">Facebook</a></td>
+    <td><code>HarshMishra</code></td>
+    <td><a href="https://www.facebook.com/HarshMishra/" target="_blank">Facebook</a></td>
 </tr>
 </table>
 
