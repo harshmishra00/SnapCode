@@ -1,0 +1,74 @@
+name: "🐛 Bug Report"
+description: Create a report to help us improve CodeSnap
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Hello! :sparkles: You found the place to submit a bug or issue that you discovered in CodeSnap, thank you for helping us out!
+
+              Having trouble making something work in CodeSnap, but it’s not a bug with the platform itself? You’ll get the fastest response by asking in our [GitHub discussions](https://github.com/RanitManik/codesnap/discussions).
+
+              **Search our [discussions](https://github.com/RanitManik/codesnap/discussions?discussions_q=) and [issues](https://github.com/RanitManik/codesnap/issues?q=)** to see if your problem has already been reported and you can add more context, or see if someone else has already solved your issue.
+
+              With that out of the way, let’s get started :bug:
+    - type: textarea
+      id: platform
+      attributes:
+          label: What platform were you using when you found the bug?
+          description: We only address issues for the most recent CodeSnap major release or upcoming releases.
+          value: |
+              - CodeSnap version: 
+              - Browser and version: 
+              - OS and version:
+      validations:
+          required: true
+    - type: input
+      id: link
+      attributes:
+          label: Live code example
+          description: |
+              This is the most important part of the bug report!
+
+              If possible, provide a link to a CodeSnap code snippet or project where the issue can be reproduced.
+          placeholder: https://codesnap.pro/snippet/... or GitHub Repo
+      validations:
+          required: false
+    - type: textarea
+      id: description
+      attributes:
+          label: Describe the Bug
+          description: What exactly is happening when you encounter the bug?
+      validations:
+          required: true
+    - type: textarea
+      id: steps
+      attributes:
+          label: Steps to reproduce the bug or issue
+          description: How can we see the reported behavior in the code example you provided? The more detail, the better!
+          placeholder: |
+              1. Go to '...'
+              2. Click on '....'
+              3. Scroll down to '....'
+              4. See error
+      validations:
+          required: true
+    - type: textarea
+      id: expected
+      attributes:
+          label: Expected behavior
+          description: What would you expect to happen if there was no bug or issue?
+          placeholder: As a user, I expected ___ behavior, but instead I am seeing ___
+      validations:
+          required: true
+    - type: textarea
+      id: screenshots_or_videos
+      attributes:
+          label: Screenshots or Videos
+          description: |
+              If applicable, add screenshots or a video to help explain your problem.
+              Supported image/file types and file size limits- https://docs.github.com/en/github/writing-on-github/working-with-advanced-formatting/attaching-files
+          placeholder: Drag your video or image files inside of this editor
+    - type: textarea
+      id: additional
+      attributes:
+          label: Additional context
