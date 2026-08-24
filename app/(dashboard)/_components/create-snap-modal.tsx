@@ -144,7 +144,6 @@ export default function CreateSnapModal({ isMobile }: { isMobile: boolean }) {
                         </ModalHeader>
                         <ModalBody>
                             <Select
-                                disableAnimation
                                 errorMessage={
                                     form.formState.errors.language?.message
                                 }
