@@ -20,7 +20,7 @@ import { Select, SelectItem } from "@nextui-org/select";
 import { Image } from "@nextui-org/image";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Spinner } from "@nextui-org/spinner";
 import { usePathname, useSearchParams } from "next/navigation";
 import NProgress from "nprogress";
@@ -32,6 +32,7 @@ import { CreateSnap } from "@/actions/create-snap";
 import { usePRouter } from "@/components/custom-router";
 
 export default function CreateSnapModal({ isMobile }: { isMobile: boolean }) {
+    const modalRef = useRef<HTMLDivElement>(null);
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { data: session } = useSession();
     const [isLoading, setIsLoading] = useState(false);
@@ -131,13 +132,13 @@ export default function CreateSnapModal({ isMobile }: { isMobile: boolean }) {
             </Button>
             <Modal
                 hideCloseButton={isLoading}
+                isDismissable={false}
                 isOpen={isOpen}
-                scrollBehavior="inside"
                 placement="top"
                 onClose={handleModalClose}
                 onOpenChange={onOpenChange}
             >
-                <ModalContent>
+                <ModalContent ref={modalRef}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                         <ModalHeader className="flex flex-col gap-1">
                             Create a New Code Snap
@@ -154,6 +155,10 @@ export default function CreateSnapModal({ isMobile }: { isMobile: boolean }) {
                                 placeholder="Choose a programming language"
                                 classNames={{
                                     listbox: "max-h-[300px] overflow-y-auto"
+                                }}
+                                popoverProps={{
+                                    portalContainer: modalRef.current ?? undefined,
+                                    containerPadding: 0,
                                 }}
                                 selectedKeys={
                                     form.watch("language")
