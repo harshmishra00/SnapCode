@@ -1,0 +1,16 @@
+name: Keep Render App Awake
+
+on:
+  schedule:
+    # Runs every 10 minutes to prevent Render free tier from spinning down
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render App
+        run: |
+          curl -s https://snapcode-mig9.onrender.com > /dev/null
+          echo "Pinged https://snapcode-mig9.onrender.com to keep it awake."
