@@ -131,8 +131,8 @@ export default function CreateSnapModal({ isMobile }: { isMobile: boolean }) {
             </Button>
             <Modal
                 hideCloseButton={isLoading}
-                isDismissable={false}
                 isOpen={isOpen}
+                scrollBehavior="inside"
                 placement="top"
                 onClose={handleModalClose}
                 onOpenChange={onOpenChange}
