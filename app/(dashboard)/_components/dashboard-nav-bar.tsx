@@ -7,6 +7,7 @@ import { Chip } from "@nextui-org/chip";
 import BrandLogo from "@/components/brand-logo";
 // import Logo from "@/components/logo";
 import { NavMenu } from "@/components/nav-menu";
+import { FriendCodingChallenge } from "@/components/friend-coding-challenge";
 
 export default function DashboardNavBar() {
     return (
@@ -21,7 +22,8 @@ export default function DashboardNavBar() {
                 <Chip
                     classNames={{ base: "bg-gradient-to-br from-indigo-500 to-pink-500", content: "text-white" }} size="sm"> Premium </Chip><p className="text-sm text-gray-500 pl-1">(beta)</p>
             </NavbarBrand>
-            <NavbarContent as="div" className="items-center" justify="end">
+            <NavbarContent as="div" className="items-center gap-3" justify="end">
+                <FriendCodingChallenge />
                 <NavMenu />
             </NavbarContent>
         </Navbar>
