@@ -11,11 +11,11 @@ export default function BrandLogo({
 }: BrandLogoProps) {
     return (
         <img
-            src="/logo.svg"
             alt="SnapCode"
-            height={height}
-            width={width}
             className={className}
+            height={height}
+            src="/logo.svg"
+            width={width}
         />
     );
 }

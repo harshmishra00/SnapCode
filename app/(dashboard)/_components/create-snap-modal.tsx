@@ -32,7 +32,9 @@ import { CreateSnap } from "@/actions/create-snap";
 import { usePRouter } from "@/components/custom-router";
 
 export default function CreateSnapModal({ isMobile }: { isMobile: boolean }) {
-    const [modalContainer, setModalContainer] = useState<HTMLElement | null>(null);
+    const [modalContainer, setModalContainer] = useState<HTMLElement | null>(
+        null,
+    );
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { data: session } = useSession();
     const [isLoading, setIsLoading] = useState(false);
@@ -140,167 +142,175 @@ export default function CreateSnapModal({ isMobile }: { isMobile: boolean }) {
             >
                 <ModalContent>
                     <div ref={setModalContainer}>
-                    <form onSubmit={form.handleSubmit(onSubmit)}>
-                        <ModalHeader className="flex flex-col gap-1">
-                            Create a New Code Snap
-                        </ModalHeader>
-                        <ModalBody>
-                            <Select
-                                errorMessage={
-                                    form.formState.errors.language?.message
-                                }
-                                isDisabled={isLoading}
-                                isInvalid={!!form.formState.errors.language}
-                                items={languageOptions}
-                                label="Select Language"
-                                placeholder="Choose a programming language"
-                                classNames={{
-                                    listbox: "max-h-[300px] overflow-y-auto"
-                                }}
-                                popoverProps={{
-                                    portalContainer: modalContainer ?? undefined,
-                                    containerPadding: 0,
-                                }}
-                                selectedKeys={
-                                    form.watch("language")
-                                        ? [form.watch("language")]
-                                        : []
-                                }
-                                onSelectionChange={(keys) => {
-                                    const selected = Array.from(keys)[0];
-
-                                    if (!selected) return;
-
-                                    const selectedLanguage =
-                                        languageOptions.find(
-                                            (lang) => lang.name === selected,
-                                        );
-
-                                    if (
-                                        selectedLanguage &&
-                                        !isLanguageAvailable(selectedLanguage)
-                                    ) {
-                                        toast(
-                                            `${selectedLanguage.name} will be available soon.`,
-                                        );
-
-                                        return;
+                        <form onSubmit={form.handleSubmit(onSubmit)}>
+                            <ModalHeader className="flex flex-col gap-1">
+                                Create a New Code Snap
+                            </ModalHeader>
+                            <ModalBody>
+                                <Select
+                                    classNames={{
+                                        listbox:
+                                            "max-h-[300px] overflow-y-auto",
+                                    }}
+                                    errorMessage={
+                                        form.formState.errors.language?.message
                                     }
+                                    isDisabled={isLoading}
+                                    isInvalid={!!form.formState.errors.language}
+                                    items={languageOptions}
+                                    label="Select Language"
+                                    placeholder="Choose a programming language"
+                                    popoverProps={{
+                                        portalContainer:
+                                            modalContainer ?? undefined,
+                                        containerPadding: 0,
+                                    }}
+                                    selectedKeys={
+                                        form.watch("language")
+                                            ? [form.watch("language")]
+                                            : []
+                                    }
+                                    onSelectionChange={(keys) => {
+                                        const selected = Array.from(keys)[0];
 
-                                    form.setValue(
-                                        "language",
-                                        (selected as string) || "",
-                                        {
-                                            shouldValidate: true,
-                                        },
-                                    );
-                                }}
-                            >
-                                {(language) => {
-                                    const available =
-                                        isLanguageAvailable(language);
+                                        if (!selected) return;
 
-                                    return (
-                                        <SelectItem
-                                            key={language.name}
-                                            endContent={
-                                                <span className="text-tiny text-default-400">
-                                                    {language.version}
-                                                </span>
-                                            }
-                                            startContent={
-                                                <Image
-                                                    alt={language.name}
-                                                    className="h-6 w-6 rounded-none bg-transparent"
-                                                    src={language.imageURL}
-                                                />
-                                            }
-                                            textValue={language.name}
-                                            value={language.name}
-                                        >
-                                            <div className="flex items-center gap-2">
-                                                {!available && (
-                                                    <span
-                                                        aria-label={`${language.name}, currently unavailable`}
-                                                        className="h-2 w-2 rounded-full bg-danger"
+                                        const selectedLanguage =
+                                            languageOptions.find(
+                                                (lang) =>
+                                                    lang.name === selected,
+                                            );
+
+                                        if (
+                                            selectedLanguage &&
+                                            !isLanguageAvailable(
+                                                selectedLanguage,
+                                            )
+                                        ) {
+                                            toast(
+                                                `${selectedLanguage.name} will be available soon.`,
+                                            );
+
+                                            return;
+                                        }
+
+                                        form.setValue(
+                                            "language",
+                                            (selected as string) || "",
+                                            {
+                                                shouldValidate: true,
+                                            },
+                                        );
+                                    }}
+                                >
+                                    {(language) => {
+                                        const available =
+                                            isLanguageAvailable(language);
+
+                                        return (
+                                            <SelectItem
+                                                key={language.name}
+                                                endContent={
+                                                    <span className="text-tiny text-default-400">
+                                                        {language.version}
+                                                    </span>
+                                                }
+                                                startContent={
+                                                    <Image
+                                                        alt={language.name}
+                                                        className="h-6 w-6 rounded-none bg-transparent"
+                                                        src={language.imageURL}
                                                     />
-                                                )}
-                                                <span>{language.name}</span>
-                                            </div>
-                                        </SelectItem>
-                                    );
-                                }}
-                            </Select>
-                            <Input
-                                errorMessage={
-                                    form.formState.errors.snapName?.message
-                                }
-                                isDisabled={isLoading}
-                                isInvalid={!!form.formState.errors.snapName}
-                                label="Snap Name"
-                                placeholder="Give your snap a descriptive name"
-                                required={false}
-                                type="text"
-                                value={form.watch("snapName")}
-                                onValueChange={(value) => {
-                                    form.setValue("snapName", value, {
-                                        shouldValidate: true,
-                                    });
-                                }}
-                            />
-                            <RadioGroup
-                                isRequired
-                                classNames={{
-                                    wrapper: cn("justify-between"),
-                                    description: cn("text-foreground-500"),
-                                }}
-                                description="Choose who can view your snap. You can change this later."
-                                errorMessage={
-                                    form.formState.errors.visibility?.message
-                                }
-                                isDisabled={isLoading}
-                                isInvalid={!!form.formState.errors.visibility}
-                                orientation="horizontal"
-                                size="sm"
-                                value={form.watch("visibility")}
-                                onValueChange={(value) => {
-                                    form.setValue("visibility", value, {
-                                        shouldValidate: true,
-                                    });
-                                }}
-                            >
-                                <CustomRadio
-                                    description="Visible to everyone"
-                                    value="public"
+                                                }
+                                                textValue={language.name}
+                                                value={language.name}
+                                            >
+                                                <div className="flex items-center gap-2">
+                                                    {!available && (
+                                                        <span
+                                                            aria-label={`${language.name}, currently unavailable`}
+                                                            className="h-2 w-2 rounded-full bg-danger"
+                                                        />
+                                                    )}
+                                                    <span>{language.name}</span>
+                                                </div>
+                                            </SelectItem>
+                                        );
+                                    }}
+                                </Select>
+                                <Input
+                                    errorMessage={
+                                        form.formState.errors.snapName?.message
+                                    }
+                                    isDisabled={isLoading}
+                                    isInvalid={!!form.formState.errors.snapName}
+                                    label="Snap Name"
+                                    placeholder="Give your snap a descriptive name"
+                                    required={false}
+                                    type="text"
+                                    value={form.watch("snapName")}
+                                    onValueChange={(value) => {
+                                        form.setValue("snapName", value, {
+                                            shouldValidate: true,
+                                        });
+                                    }}
+                                />
+                                <RadioGroup
+                                    isRequired
+                                    classNames={{
+                                        wrapper: cn("justify-between"),
+                                        description: cn("text-foreground-500"),
+                                    }}
+                                    description="Choose who can view your snap. You can change this later."
+                                    errorMessage={
+                                        form.formState.errors.visibility
+                                            ?.message
+                                    }
+                                    isDisabled={isLoading}
+                                    isInvalid={
+                                        !!form.formState.errors.visibility
+                                    }
+                                    orientation="horizontal"
+                                    size="sm"
+                                    value={form.watch("visibility")}
+                                    onValueChange={(value) => {
+                                        form.setValue("visibility", value, {
+                                            shouldValidate: true,
+                                        });
+                                    }}
                                 >
-                                    Public
-                                </CustomRadio>
-                                <CustomRadio
-                                    description="Visible only to you"
-                                    value="private"
+                                    <CustomRadio
+                                        description="Visible to everyone"
+                                        value="public"
+                                    >
+                                        Public
+                                    </CustomRadio>
+                                    <CustomRadio
+                                        description="Visible only to you"
+                                        value="private"
+                                    >
+                                        Private
+                                    </CustomRadio>
+                                </RadioGroup>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button
+                                    fullWidth
+                                    color="primary"
+                                    isDisabled={isLoading}
+                                    startContent={
+                                        !isLoading && <PlusIcon size={16} />
+                                    }
+                                    type="submit"
                                 >
-                                    Private
-                                </CustomRadio>
-                            </RadioGroup>
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button
-                                fullWidth
-                                color="primary"
-                                isDisabled={isLoading}
-                                startContent={
-                                    !isLoading && <PlusIcon size={16} />
-                                }
-                                type="submit"
-                            >
-                                {isLoading ? (
-                                    <Spinner color="current" size="sm" />
-                                ) : (
-                                    "Create Snap"
-                                )}
-                            </Button>
-                        </ModalFooter>
-                    </form>
+                                    {isLoading ? (
+                                        <Spinner color="current" size="sm" />
+                                    ) : (
+                                        "Create Snap"
+                                    )}
+                                </Button>
+                            </ModalFooter>
+                        </form>
                     </div>
                 </ModalContent>
             </Modal>

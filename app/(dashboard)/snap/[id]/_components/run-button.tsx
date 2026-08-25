@@ -3,7 +3,6 @@
 import { LoaderCircle, Play } from "lucide-react";
 import { Button } from "@nextui-org/button";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 import { useCodeStore } from "@/stores";
 import { ExecuteCode } from "@/actions/execute-code";

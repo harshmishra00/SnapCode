@@ -17,12 +17,26 @@ export default function DashboardNavBar() {
                     <BrandLogo className="mx-2" />
                     <h1 className="font-monoton text-xl font-bold text-black dark:text-white">
                         SnapCode
-                    </h1>&nbsp;&nbsp;
+                    </h1>
+                    &nbsp;&nbsp;
                 </Link>
                 <Chip
-                    classNames={{ base: "bg-gradient-to-br from-indigo-500 to-pink-500", content: "text-white" }} size="sm"> Premium </Chip><p className="text-sm text-gray-500 pl-1">(beta)</p>
+                    classNames={{
+                        base: "bg-gradient-to-br from-indigo-500 to-pink-500",
+                        content: "text-white",
+                    }}
+                    size="sm"
+                >
+                    {" "}
+                    Premium{" "}
+                </Chip>
+                <p className="pl-1 text-sm text-gray-500">(beta)</p>
             </NavbarBrand>
-            <NavbarContent as="div" className="items-center gap-3" justify="end">
+            <NavbarContent
+                as="div"
+                className="items-center gap-3"
+                justify="end"
+            >
                 <FriendCodingChallenge />
                 <NavMenu />
             </NavbarContent>
