@@ -16,7 +16,7 @@ import { cn } from "@nextui-org/theme";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Select, SelectItem } from "@nextui-org/select";
+import { Select, SelectItem, SelectSection } from "@nextui-org/select";
 import { Image } from "@nextui-org/image";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
@@ -157,7 +157,6 @@ export default function CreateSnapModal({ isMobile }: { isMobile: boolean }) {
                                     }
                                     isDisabled={isLoading}
                                     isInvalid={!!form.formState.errors.language}
-                                    items={languageOptions}
                                     label="Select Language"
                                     placeholder="Choose a programming language"
                                     popoverProps={{
@@ -203,40 +202,64 @@ export default function CreateSnapModal({ isMobile }: { isMobile: boolean }) {
                                         );
                                     }}
                                 >
-                                    {(language) => {
-                                        const available =
-                                            isLanguageAvailable(language);
-
-                                        return (
-                                            <SelectItem
-                                                key={language.name}
-                                                endContent={
-                                                    <span className="text-tiny text-default-400">
-                                                        {language.version}
-                                                    </span>
-                                                }
-                                                startContent={
-                                                    <Image
-                                                        alt={language.name}
-                                                        className="h-6 w-6 rounded-none bg-transparent"
-                                                        src={language.imageURL}
-                                                    />
-                                                }
-                                                textValue={language.name}
-                                                value={language.name}
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    {!available && (
+                                    <SelectSection title="Available Languages" showDivider>
+                                        {languageOptions
+                                            .filter(lang => isLanguageAvailable(lang))
+                                            .map((language) => (
+                                                <SelectItem
+                                                    key={language.name}
+                                                    endContent={
+                                                        <span className="text-tiny text-default-400">
+                                                            {language.version}
+                                                        </span>
+                                                    }
+                                                    startContent={
+                                                        <Image
+                                                            alt={language.name}
+                                                            className="h-6 w-6 rounded-none bg-transparent"
+                                                            src={language.imageURL}
+                                                        />
+                                                    }
+                                                    textValue={language.name}
+                                                    value={language.name}
+                                                >
+                                                    <div className="flex items-center gap-2">
+                                                        <span>{language.name}</span>
+                                                    </div>
+                                                </SelectItem>
+                                        ))}
+                                    </SelectSection>
+                                    <SelectSection title="Coming Soon">
+                                        {languageOptions
+                                            .filter(lang => !isLanguageAvailable(lang))
+                                            .map((language) => (
+                                                <SelectItem
+                                                    key={language.name}
+                                                    endContent={
+                                                        <span className="text-tiny text-default-400">
+                                                            {language.version}
+                                                        </span>
+                                                    }
+                                                    startContent={
+                                                        <Image
+                                                            alt={language.name}
+                                                            className="h-6 w-6 rounded-none bg-transparent opacity-50"
+                                                            src={language.imageURL}
+                                                        />
+                                                    }
+                                                    textValue={language.name}
+                                                    value={language.name}
+                                                >
+                                                    <div className="flex items-center gap-2 opacity-50">
                                                         <span
                                                             aria-label={`${language.name}, currently unavailable`}
                                                             className="h-2 w-2 rounded-full bg-danger"
                                                         />
-                                                    )}
-                                                    <span>{language.name}</span>
-                                                </div>
-                                            </SelectItem>
-                                        );
-                                    }}
+                                                        <span>{language.name}</span>
+                                                    </div>
+                                                </SelectItem>
+                                        ))}
+                                    </SelectSection>
                                 </Select>
                                 <Input
                                     errorMessage={

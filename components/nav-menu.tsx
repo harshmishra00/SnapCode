@@ -12,7 +12,10 @@ import { User } from "@nextui-org/user";
 import { Home, LogOut, PlusIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
+import { useEffect } from "react";
 
+import { useCreditStore } from "@/stores/credit-store";
+import { GetUserCredits } from "@/actions/get-user-credits";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { SignOut } from "@/actions/sign-out";
 import { usePRouter } from "@/components/custom-router";
@@ -20,6 +23,18 @@ import { usePRouter } from "@/components/custom-router";
 export const NavMenu = ({ size }: { size?: number }) => {
     const { data: session } = useSession();
     const router = usePRouter();
+    
+    const { credits, isPremium, setCreditsData } = useCreditStore();
+
+    useEffect(() => {
+        if (session?.user?.id) {
+            GetUserCredits().then((data) => {
+                if (data) {
+                    setCreditsData(data.credits, data.isPremium);
+                }
+            });
+        }
+    }, [session?.user?.id, setCreditsData]);
 
     const handleSignOut = async () => {
         try {
@@ -37,6 +52,20 @@ export const NavMenu = ({ size }: { size?: number }) => {
     return (
         <div className="flex items-center gap-3">
             <ThemeSwitch />
+            
+            {session && (
+                <div className="flex items-center gap-1.5 px-2 py-1 bg-default-100 rounded-full border border-default-200">
+                    <span className="text-xs font-medium text-default-600">
+                        {isPremium ? (
+                            <span className="text-warning-500">Premium</span>
+                        ) : (
+                            <>{credits !== null ? credits : "..."} / 10</>
+                        )}
+                    </span>
+                    <span className="text-[10px] text-default-400 uppercase font-bold tracking-wider">Credits</span>
+                </div>
+            )}
+            
             <Dropdown placement="bottom-end">
                 <DropdownTrigger>
                     <Avatar

@@ -3,9 +3,12 @@
 import { LoaderCircle, Play } from "lucide-react";
 import { Button } from "@nextui-org/button";
 import { toast } from "sonner";
+import { useEffect } from "react";
 
 import { useCodeStore } from "@/stores";
+import { useCreditStore } from "@/stores/credit-store";
 import { ExecuteCode } from "@/actions/execute-code";
+import { GetUserCredits } from "@/actions/get-user-credits";
 
 export default function RunButton() {
     const {
@@ -17,6 +20,16 @@ export default function RunButton() {
         setError,
         availableLanguages,
     } = useCodeStore();
+
+    const { credits, isPremium, setCreditsData, decrementCredit } = useCreditStore();
+
+    useEffect(() => {
+        GetUserCredits().then((data) => {
+            if (data) {
+                setCreditsData(data.credits, data.isPremium);
+            }
+        });
+    }, [setCreditsData]);
 
     const handleRun = async () => {
         if (!code || !language.name) return;
@@ -54,6 +67,7 @@ export default function RunButton() {
             } else {
                 toast.success("Ran successfully");
             }
+            decrementCredit();
         } else {
             // Piston unreachable, env not configured, unknown language, etc.
             setOutput([result.error]);
@@ -85,6 +99,18 @@ export default function RunButton() {
             >
                 Run
             </Button>
+            
+            {credits !== null && !isPremium && (
+                <div className="flex items-center text-xs text-default-500 justify-self-center ml-3">
+                    <span className="font-semibold">{credits}</span>/10 credits
+                </div>
+            )}
+            
+            {isPremium && (
+                <div className="flex items-center text-xs text-warning-500 justify-self-center ml-3 font-semibold">
+                    Unlimited
+                </div>
+            )}
         </>
     );
 }

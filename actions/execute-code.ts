@@ -1,8 +1,11 @@
 "use server";
 
 import axios from "axios";
+import { getServerSession } from "next-auth";
 
 import { languageOptions } from "@/config/languages";
+import { authOptions } from "@/lib/auth";
+import { consumeUserCredit } from "@/lib/db/users";
 
 export type ExecuteCodeResult =
     | {
@@ -49,6 +52,23 @@ export async function ExecuteCode(requestPayload: {
         return {
             success: false,
             error: "This language is currently unavailable.",
+        };
+    }
+
+    // Check session and consume credit
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user?.id) {
+        return {
+            success: false,
+            error: "You must be logged in to execute code.",
+        };
+    }
+
+    const hasCredit = await consumeUserCredit(session.user.id);
+    if (!hasCredit) {
+        return {
+            success: false,
+            error: "You have used all 10 free executions for today. Please wait until tomorrow or upgrade to Premium.",
         };
     }
 
